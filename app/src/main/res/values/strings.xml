@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">صِلة</string>
+    <string name="widget_name">صِلة — بطاقة اليوم</string>
+    <string name="widget_description">اسم شخص اليوم وزر واتساب</string>
+</resources>
