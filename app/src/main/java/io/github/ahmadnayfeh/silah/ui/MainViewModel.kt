@@ -48,6 +48,8 @@ class MainViewModel(private val c: AppContainer) : ViewModel() {
 
     private fun builder() = UiBuilder(repo.today(), repo.clock.zone)
 
+    fun todayDate(): java.time.LocalDate = repo.today()
+
     val today: StateFlow<TodayUi> =
         combine(repo.snapshot, store.state, store.settings, tick) { s, st, set, _ ->
             val (decision, pick) = repo.decide(s, st)

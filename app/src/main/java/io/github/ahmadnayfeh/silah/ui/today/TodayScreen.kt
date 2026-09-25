@@ -132,12 +132,12 @@ private fun SuggestionCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.small)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.16f))
                         .padding(horizontal = 12.dp, vertical = 10.dp),
                 ) {
-                    Icon(Icons.Rounded.Cake, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(20.dp))
+                    Icon(Icons.Rounded.Cake, null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(20.dp))
                     Spacer(Modifier.width(10.dp))
-                    Text(card.occasionText, color = MaterialTheme.colorScheme.onSecondaryContainer, style = MaterialTheme.typography.bodyLarge)
+                    Text(card.occasionText, color = MaterialTheme.colorScheme.secondary, style = MaterialTheme.typography.bodyLarge)
                 }
             }
             if (card.threads.isNotEmpty()) {

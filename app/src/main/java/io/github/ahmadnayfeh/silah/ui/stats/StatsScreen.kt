@@ -54,8 +54,6 @@ fun StatsScreen(ui: StatsUi?) {
         }
 
         SoftCard {
-            Text("هذا الشهر", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.height(4.dp))
             Text(ArabicText.coverage(ui.current.contacted, ui.current.total), style = MaterialTheme.typography.titleLarge)
         }
 

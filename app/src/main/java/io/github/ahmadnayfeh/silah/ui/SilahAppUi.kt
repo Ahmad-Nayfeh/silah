@@ -65,7 +65,6 @@ import io.github.ahmadnayfeh.silah.ui.settings.SettingsScreen
 import io.github.ahmadnayfeh.silah.ui.stats.StatsScreen
 import io.github.ahmadnayfeh.silah.ui.today.TodayScreen
 import kotlinx.coroutines.withTimeoutOrNull
-import java.time.LocalDate
 
 private data class Tab(val route: String, val label: String, val icon: ImageVector)
 
@@ -155,7 +154,7 @@ fun SilahAppUi(vm: MainViewModel) {
         NavHost(nav, startDestination = "today", modifier = Modifier.padding(padding)) {
             composable("today") {
                 val ui by vm.today.collectAsStateWithLifecycle()
-                val today = LocalDate.now()
+                val today = vm.todayDate()
                 TodayScreen(
                     ui = ui,
                     dateText = "${ArabicText.dayName(today.dayOfWeek)}، ${ArabicText.dayMonth(today)}",
@@ -315,7 +314,7 @@ private fun SettingsRoute(vm: MainViewModel, lastResume: Long) {
             onChange = vm::updateSettings,
             onNotificationSettings = { context.openSafely(notificationSettingsIntent(context)) },
             onBatterySettings = { context.openSafely(appDetailsIntent(context)) },
-            onExport = { exporter.launch("silah-backup-${LocalDate.now()}.json") },
+            onExport = { exporter.launch("silah-backup-${vm.todayDate()}.json") },
             onImport = { importer.launch(arrayOf("application/json", "text/plain", "application/octet-stream")) },
             onErase = vm::eraseAll,
         ),
