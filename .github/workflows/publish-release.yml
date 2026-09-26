@@ -1,0 +1,37 @@
+name: Publish release
+
+# A signed APK placed in dist/ (named silah-vX.Y.Z.apk) is published as a
+# GitHub Release with that version tag. The APK is signed outside CI, so no
+# signing key ever needs to be stored in GitHub for this to work.
+on:
+  push:
+    paths:
+      - "dist/*.apk"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find the APK and its version
+        id: apk
+        run: |
+          apk=$(ls dist/silah-v*.apk | sort -V | tail -1)
+          version=$(basename "$apk" .apk | sed 's/^silah-//')
+          echo "file=$apk" >> "$GITHUB_OUTPUT"
+          echo "tag=$version" >> "$GITHUB_OUTPUT"
+          sha256sum "$apk"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.apk.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: صِلة ${{ steps.apk.outputs.tag }}
+          body_path: dist/RELEASE_NOTES.md
+          files: ${{ steps.apk.outputs.file }}
+          make_latest: true

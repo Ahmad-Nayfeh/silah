@@ -1,0 +1,22 @@
+# Gradle / Android Studio
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+.kotlin/
+
+# Signing — never commit keys or their passwords
+*.jks
+*.keystore
+*.p12
+keystore.properties
+signing/
+
+# Personal data — never commit real backups
+*.silah.json
+silah-backup*.json
